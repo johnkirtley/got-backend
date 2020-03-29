@@ -14,7 +14,7 @@ module.exports = {
 	},
 	production: {
 		client: 'pg',
-		connection: 'postgres://localhost:5432/game-of-thrones',
+		connection: process.env.DATABASE_URL,
 		migrations: {
 			directory: './data/migrations'
 		},
