@@ -13,7 +13,7 @@ exports.up = function(knex) {
 		.createTable('watched', tbl => {
 			tbl.increments();
 
-			tbl.string('episode_name');
+			tbl.string('episode_name').unique();
 			tbl
 				.integer('user_id')
 				.unsigned()
