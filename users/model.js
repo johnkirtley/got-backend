@@ -3,17 +3,15 @@ const db = require('../data/db-config');
 module.exports = {
 	find,
 	addUser,
-	// remove,
+	removeEpisode,
 	// findById,
 	findWatched,
 	addWatched,
-	findBy
+	findBy,
 };
 
 function find() {
-	return db('users')
-		.select('id', 'username')
-		.orderBy('id');
+	return db('users').select('id', 'username').orderBy('id');
 }
 
 function addUser(user) {
@@ -39,4 +37,11 @@ function findWatched(id) {
 		.join('watched', 'users.id', 'watched.user_id')
 		.select('watched.episode_name')
 		.where('watched.user_id', id);
+}
+
+function removeEpisode(id, episode) {
+	return db('watched')
+		.select('episode_name', episode)
+		.where('user_id', id)
+		.delete();
 }

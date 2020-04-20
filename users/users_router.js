@@ -9,10 +9,10 @@ router.post('/:id', (req, res) => {
 	const { id } = req.params;
 
 	Model.addWatched(id, episode_name)
-		.then(response => {
+		.then((response) => {
 			res.status(200).json({ message: 'Episode added' });
 		})
-		.catch(err => {
+		.catch((err) => {
 			console.log('Error adding episode', err);
 		});
 });
@@ -20,10 +20,10 @@ router.post('/:id', (req, res) => {
 // Get All Users
 router.get('/', (req, res) => {
 	Model.find()
-		.then(users => {
+		.then((users) => {
 			res.status(200).json(users);
 		})
-		.catch(err => {
+		.catch((err) => {
 			console.log('Could not get users', err);
 		});
 });
@@ -33,11 +33,26 @@ router.get('/:id/watched', (req, res) => {
 	const { id } = req.params;
 
 	Model.findWatched(id)
-		.then(episodes => {
+		.then((episodes) => {
 			res.status(201).json(episodes);
 		})
-		.catch(err => {
+		.catch((err) => {
 			console.log('Error getting episodes', err);
+		});
+});
+
+// Remove Episode
+
+router.delete('/:id', (req, res) => {
+	const { episode } = req.body;
+	const { id } = req.params;
+
+	Model.removeEpisode(id, episode)
+		.then((response) => {
+			res.status(200).json({ message: 'Episode Removed' });
+		})
+		.catch((err) => {
+			console.log('Error removing episode', err);
 		});
 });
 
