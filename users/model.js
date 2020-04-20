@@ -40,8 +40,5 @@ function findWatched(id) {
 }
 
 function removeEpisode(id, episode) {
-	return db('watched')
-		.select('episode_name', episode)
-		.where('user_id', id)
-		.delete();
+	return db('watched').where({ user_id: id, episode_name: episode }).delete();
 }
