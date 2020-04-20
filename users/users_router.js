@@ -44,10 +44,9 @@ router.get('/:id/watched', (req, res) => {
 // Remove Episode
 
 router.delete('/:id', (req, res) => {
-	const { episode } = req.body;
-	const { id } = req.params;
+	const { user_id, episode_name } = req.body;
 
-	Model.removeEpisode(id, episode)
+	Model.removeEpisode(user_id, episode_name)
 		.then((response) => {
 			res.status(200).json({ message: 'Episode Removed' });
 		})
